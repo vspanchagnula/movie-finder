@@ -1,0 +1,28 @@
+<div>
+  Search By Movie Name : <input type="text" name="movieName" [(ngModel)]="movieName">
+  Password  : <input type="password" name="password" [(ngModel)]="password">
+  
+  <button (click)=searchByMovieName() class="btn btn-success">Search</button>
+  
+</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Target Date</th>
+        <th>is Completed?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--   for (movie movie: movies) {  -->
+              <tr *ngFor="let movie of movies">
+                <td>{{movie.id}}</td>
+                <td>{{movie.name | uppercase}}</td>
+                <td>{{movie.directedBy}}</td>
+              </tr>
+      <!-- } -->
+    </tbody>
+
+  </table>
