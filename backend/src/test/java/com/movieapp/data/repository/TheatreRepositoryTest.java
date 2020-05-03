@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,7 +18,6 @@ import com.movieapp.data.entity.Theatre;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TheatreRepositoryTest {
     @Autowired
     private TheatreRepository theatreRepository;
@@ -29,11 +27,12 @@ public class TheatreRepositoryTest {
 
     @Before
     public void init() {
-        Theatre aNewTheatre = new Theatre();
-        aNewTheatre.setTheatreName("RAHUL");
-        aNewTheatre.setTheatreCity("PUNE");
+        Theatre theatre = new Theatre();
+        theatre.setTheatreName("Regal");
+        theatre.setTheatreCity("Philadelpha");
+        theatre.setTheatreId(2);
 
-        testEntityManager.persist(aNewTheatre);
+        testEntityManager.persist(theatre);
         testEntityManager.flush();
     }
 
@@ -42,14 +41,14 @@ public class TheatreRepositoryTest {
         Theatre foundTheatre = theatreRepository.findByTheatreId(2L);
 
         assertNotNull(foundTheatre);
-        assertEquals(foundTheatre.getTheatreName(), "INOX");
+        assertEquals(foundTheatre.getTheatreName(), "Regal");
     }
 
     @Test
     public void testFindByTheatreNameAndTheatreCity() {
-        Theatre foundTheatre = theatreRepository.findByTheatreNameAndTheatreCity("RAHUL", "PUNE");
+        Theatre foundTheatre = theatreRepository.findByTheatreNameAndTheatreCity("Regal", "Philadelpha");
 
         assertNotNull(foundTheatre);
-        assertThat(foundTheatre.getTheatreName(), is(equalTo("RAHUL")));
+        assertThat(foundTheatre.getTheatreName(), is(equalTo("Regal")));
     }
 }

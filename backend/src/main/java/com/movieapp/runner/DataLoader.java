@@ -25,15 +25,18 @@ import org.springframework.stereotype.Component;
 import com.movieapp.data.entity.Movie;
 import com.movieapp.data.entity.Screen;
 import com.movieapp.data.entity.Screening;
+import com.movieapp.data.entity.Theatre;
 import com.movieapp.data.repository.MovieRepository;
 import com.movieapp.data.repository.ScreenRepository;
 import com.movieapp.data.repository.ScreeningRepository;
+import com.movieapp.data.repository.TheatreRepository;
 
 @Component
 public class DataLoader implements ApplicationRunner {
     private MovieRepository movieRepository;
     private ScreenRepository screenRepository;
     private ScreeningRepository screeningRepository;
+    private TheatreRepository theatreRepository;
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     public MovieRepository getMovieRepository() {
@@ -50,10 +53,11 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     public DataLoader(MovieRepository movieRepository, ScreeningRepository screeningRepository,
-                      ScreenRepository screenRepository) {
+                      ScreenRepository screenRepository, TheatreRepository theatreRepository) {
         this.movieRepository = movieRepository;
         this.screeningRepository = screeningRepository;
         this.screenRepository = screenRepository;
+        this.theatreRepository = theatreRepository;
     }
 
     private class ProcessMovie implements Runnable {
@@ -188,13 +192,36 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-    	populateScreening();
+    	populateScreensAndTheatres();
         populateMovieTable();
         populateScreeningsTable();
     }
 
-	private void populateScreening() {
-		//Screening screening= 
+	private void populateScreensAndTheatres() {
+		String[] city = {"Philadelphia","Devon","Springfield","Chester","Malvern"};
+		String[] name = {"Movie Tavern","Regal","Cinemarx","Inox","Apple Cinemas"};
+		
+		int screenId=1;
+		for(int i=0;i<5;i++) {
+			Theatre theatre = new Theatre();
+			theatre.setTheatreId(i+1);
+			theatre.setTheatreCity(city[i]);
+			theatre.setTheatreName(name[i]);
+			try {
+				theatreRepository.save(theatre);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			for(int j=1;j<=3;j++) {
+				Screen screen = new Screen();
+				screen.setScreenId(screenId);
+				screen.setSeatsNum(screenId*10);
+				screen.setTheatreId(theatre.getTheatreId());
+				screenRepository.save(screen);
+				screenId++;
+			}
+		}
 		
 	}
 }

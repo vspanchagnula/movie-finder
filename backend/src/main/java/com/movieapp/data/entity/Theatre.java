@@ -3,16 +3,21 @@ package com.movieapp.data.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "THEATRE")
 public class Theatre {
-    @Id
-    @Column(name = "THEATRE_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
     private long theatreId;
-    @Column(name = "THEATRE_NAME")
     private String theatreName;
-    @Column(name = "THEATRE_CITY")
-    private String theatreCity;
+ 	private String theatreCity;
+ 	
+ 	 public Theatre() {
+ 		super();
+ 	}
+ 	 public Theatre(long theatreId, String theatreName, String theatreCity) {
+ 		super();
+ 		this.theatreId = theatreId;
+ 		this.theatreName = theatreName;
+ 		this.theatreCity = theatreCity;
+ 	}
 
     public long getTheatreId() {
         return theatreId;
