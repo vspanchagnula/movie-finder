@@ -1,28 +1,39 @@
-<H1>Movie</H1>
+<h1></h1>
 
-<div class="container">
+<div class="container1">
 
-  <div class="container movie-details">
-      <img th:src="${theatre.moviePosterUrl}"/>
-      <h4 th:text="${theatre.movieName}"></h4>
+  <div class="movie-details">
+    <div class="movie-image">
+      <img src="https://m.media-amazon.com/images/M/MV5BODgzNGQyNjEtYTU0My00ZGY2LTg4Y2MtMWNiY2QyZGE1MGRiXkEyXkFqcGdeQXVyNjMwMjk0MTQ@._V1_UX182_CR0,0,182,268_AL_.jpg"/>
+    </div>
+    <div class="movie-name">
+      <h4> Shanghai Triad</h4>
+    </div>
+
   </div>
 
-  <div class="container">
+  <div class="container2">
       <table class="table">
+          <th>Theatre Name</th>
+          <th>Screening Date</th>
+          <th>Screening Time</th>
+          <th>Tickets#</th>
           <tbody>
               <tr *ngFor="let theatre of theatres">
-                  <td>  {{theatre.movieName}}</td>
+                  <td>  {{theatre.theatreName}}</td>
                   <td>  {{theatre.screeningDate}}</td>
                   <td>  {{theatre.screeningTime}}</td>
-                  <input type="text" #movieName="ngModel" 
-                  [(ngModel)]="theatre.numSeats" class="form-control" 
+                  <td>
+                  <input type="text" #movieName="ngModel"
+                  [(ngModel)]="theatre.numSeats" class="form-control"
                       name="numSeats" required="required">
-                
+                  </td>
+
                   <td><button (click)="bookTickets(theatre)" class="btn btn-success">Book Tickets</button>
                   </td>
               </tr>
           </tbody>
       </table>
   </div>
-  
+
 </div>

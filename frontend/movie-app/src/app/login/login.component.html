@@ -1,15 +1,12 @@
-<H1>My Movie Login!</H1>
-
-<br>
 
 <div class="container">
-  <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
-
-  <div>
-    User Name : <input type="text" name="username" [(ngModel)]="username">
-    Password  : <input type="password" name="password" [(ngModel)]="password">
-    
-    <button (click)=handleJWTAuthLogin() class="btn btn-success">Login</button>
-    
+    <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+  
+    <div class="login-block">
+      <h1>Login</h1>
+      <input type="text" value="" placeholder="Username" id="username" [(ngModel)]="username"/>
+      <input type="password" value="" placeholder="Password" id="password" [(ngModel)]="password"/>
+      <button (click)=handleJWTAuthLogin()>Submit</button>
+    </div>
   </div>
-</div>
+  

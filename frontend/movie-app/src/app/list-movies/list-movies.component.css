@@ -1,0 +1,16 @@
+.movieImg {
+    width: 100px;
+    height: 125px;
+    }
+
+.movieSearch {
+  margin-left: 70%;
+}
+.searchBtn {
+  margin-left: 2%;
+}
+
+.searchInput {
+      width: 200px;
+      height: 30px;
+}

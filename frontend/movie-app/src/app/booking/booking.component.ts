@@ -42,8 +42,8 @@ export class BookingComponent implements OnInit {
 }
 
 bookTickets(theatre){
-  console.log("In booktickets")
   this.movieService.theatre = theatre
+  this.selectedTheatre = theatre
   this.router.navigate(['confirmation']);
   
 }
